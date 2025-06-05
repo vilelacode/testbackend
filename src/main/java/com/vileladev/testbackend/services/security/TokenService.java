@@ -23,7 +23,7 @@ public class TokenService {
                         .getUsername())
                 .withClaim("id", usuario.getId())
                 .withExpiresAt(LocalDateTime.now()
-                        .plusMinutes(99)
+                        .plusMinutes(999)
                         .toInstant(ZoneOffset.of("-03:00"))
                 ).sign(Algorithm.HMAC256(secret));
     }

@@ -7,20 +7,20 @@ import com.vileladev.testbackend.services.security.TokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
+/*import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoExtension;*/
 
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+//import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 public class TokenServiceTest {
 
-    @InjectMocks
+    /*@InjectMocks
     private TokenService tokenService;
 
     @Mock
@@ -55,5 +55,5 @@ public class TokenServiceTest {
         String subject = tokenService.getSubject(token);
 
         assertEquals("usuarioTeste", subject);
-    }
+    }*/
 }

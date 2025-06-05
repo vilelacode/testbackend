@@ -39,6 +39,7 @@ public class Configurations {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(HttpMethod.POST, "auth/login").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "conta/criar").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "conta/confirmar/**").permitAll();
                     auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/v3/api-docs/**").permitAll();
                     auth.anyRequest().authenticated();
