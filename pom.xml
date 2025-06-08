@@ -108,11 +108,7 @@
 			<version>2.2.224</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.awspring.cloud</groupId>
-			<artifactId>spring-cloud-aws-dependencies</artifactId>
-			<version>3.0.1</version>
-		</dependency>
+
 <!--		<dependency>
 			<groupId>io.awspring.cloud</groupId>
 			<artifactId>spring-cloud-aws-dependencies</artifactId>
@@ -121,14 +117,24 @@
 			<scope>import</scope>
 		</dependency>-->
 		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>sqs</artifactId>
-			<version>2.25.13</version>
+			<groupId>io.awspring.cloud</groupId>
+			<artifactId>spring-cloud-aws-autoconfigure</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>regions</artifactId>
+			<version>2.25.13</version>  <!-- use a mesma versão do seu aws-sdk-v2 (ex: 2.25.13) -->
+		</dependency>
+		<!-- se usar messaging: -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-aws-messaging</artifactId>
 			<version>2.2.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sqs</artifactId>
+			<version>2.25.13</version>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
@@ -151,7 +157,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.awspring.cloud</groupId>
+				<artifactId>spring-cloud-aws-dependencies</artifactId>
+				<version>3.0.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
