@@ -11,17 +11,6 @@ parameters {
 }
 
 stages {
-    stage('Verify Tools') {
-    steps {
-        // Verifica se AWS EB CLI está instalado e executável
-        sh "which eb || (echo 'EB CLI não encontrado. Instale o AWS Elastic Beanstalk CLI no agente Jenkins.' && exit 1)"
-        // Ajusta permissão de execução no EB CLI (pipx/snap)
-        sh "chmod +x $(which eb) || true"
-        // Verifica se zip está instalado e executável
-        sh "which zip || (echo 'zip não encontrado. Instale zip no agente Jenkins.' && exit 1)"
-    }
-}
-    }
     stage('Checkout') {
         steps {
             // Clona o repositório e garante permissão de execução aos scripts
