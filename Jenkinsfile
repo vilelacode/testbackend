@@ -13,14 +13,12 @@ parameters {
 stages {
     stage('Checkout') {
         steps {
-            // Clona o repositório e garante permissão de execução aos scripts
             checkout scm
             sh 'chmod +x mvnw deploy.sh'
         }
     }
     stage('Build') {
         steps {
-            // Usa Maven Wrapper para compilar
             sh './mvnw clean package -DskipTests'
         }
     }
