@@ -2,7 +2,7 @@ pipeline {
   agent any
 
 environment {
-    PATH = "/home/jenkins/.local/bin:${env.PATH}"
+    PATH = "/home/fabio/.local/bin:/snap/bin:${env.PATH}"
     AWS_DEFAULT_REGION = 'us-east-1'
 }
 
