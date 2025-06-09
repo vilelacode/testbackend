@@ -11,26 +11,27 @@ parameters {
 }
 
 stages {
-        stage('Verify Tools') {
-        steps {
-            // Verifica se AWS EB CLI está instalado e executável
-            sh "which eb || (echo 'EB CLI não encontrado. Instale o AWS Elastic Beanstalk CLI no agente Jenkins.' && exit 1)"
-            // Ajusta permissão de execução no EB CLI (pipx/snap)
-            sh "chmod +x $(which eb) || true"
-            // Verifica se zip está instalado e executável
-            sh "which zip || (echo 'zip não encontrado. Instale zip no agente Jenkins.' && exit 1)"
-        }
+    stage('Verify Tools') {
+    steps {
+        // Verifica se AWS EB CLI está instalado e executável
+        sh "which eb || (echo 'EB CLI não encontrado. Instale o AWS Elastic Beanstalk CLI no agente Jenkins.' && exit 1)"
+        // Ajusta permissão de execução no EB CLI (pipx/snap)
+        sh "chmod +x $(which eb) || true"
+        // Verifica se zip está instalado e executável
+        sh "which zip || (echo 'zip não encontrado. Instale zip no agente Jenkins.' && exit 1)"
+    }
+}
     }
     stage('Checkout') {
         steps {
+            // Clona o repositório e garante permissão de execução aos scripts
             checkout scm
-            //sh 'apt-get update && apt-get install -y zip'
-            sh 'chmod +x ./mvnw'
-            sh 'chmod +x ./deploy.sh'
+            sh 'chmod +x mvnw deploy.sh'
         }
     }
     stage('Build') {
         steps {
+            // Usa Maven Wrapper para compilar
             sh './mvnw clean package -DskipTests'
         }
     }
@@ -54,4 +55,5 @@ post {
         echo 'Falha no deploy.'
     }
 }
+
 }
