@@ -2,29 +2,26 @@ environment {
     AWS_DEFAULT_REGION = 'us-east-1'
 }
 
-stages {
-    stage('Checkout') {
-        steps {
-            checkout scm
-        }
-    }
-    stage('Build') {
-        steps {
-             sh './mvnw clean package -DskipTests'
-        }
-    }
-    stage('Deploy to Elastic Beanstalk') {
-        steps {
-          sh './deploy.sh'
-        }
-    }
+def EB_ENV_NAME = "baseapi-${params.DEPLOY_ENV}-env"
+
+stage('Checkout') {
+    checkout scm
+}
+
+stage('Build') {
+    sh './mvnw clean package -DskipTests'
+}
+
+stage('Deploy') {
+    echo "Fazendo deploy no ambiente: ${EB_ENV_NAME}"
+    sh "./deploy.sh ${EB_ENV_NAME}"
 }
 
 post {
     success {
-        echo 'Deployment concluído com sucesso.'
+        echo 'Deploy deu bom.'
     }
     failure {
-        echo 'Falha no deployment.'
+        echo 'Falha no deploy.'
     }
 }
