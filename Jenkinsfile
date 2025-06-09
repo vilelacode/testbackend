@@ -13,6 +13,8 @@ stages {
     stage('Checkout') {
         steps {
             checkout scm
+            sh 'chmod +x ./mvnw'
+            sh 'chmod +x ./deploy.sh'
         }
     }
     stage('Build') {
@@ -34,10 +36,10 @@ stages {
 
 post {
     success {
-        echo 'Deploy deu bom, meu bom.'
+        echo 'Deploy deu bom.'
     }
     failure {
         echo 'Falha no deploy.'
-        }
     }
+}
 }
