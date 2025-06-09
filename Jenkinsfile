@@ -2,24 +2,36 @@ environment {
     AWS_DEFAULT_REGION = 'us-east-1'
 }
 
-def EB_ENV_NAME = "baseapi-${params.DEPLOY_ENV}-env"
-
-stage('Checkout') {
-    checkout scm
+parameters {
+    choice(name: 'DEPLOY_ENV', choices: ['staging', 'production'], description: 'Selecione o ambiente de deploy')
 }
 
-stage('Build') {
-    sh './mvnw clean package -DskipTests'
-}
-
-stage('Deploy') {
-    echo "Fazendo deploy no ambiente: ${EB_ENV_NAME}"
-    sh "./deploy.sh ${EB_ENV_NAME}"
+stages {
+    stage('Checkout') {
+        steps {
+            checkout scm
+        }
+    }
+    stage('Build') {
+        steps {
+            sh './mvnw clean package -DskipTests'
+        }
+    }
+    stage('Deploy') {
+        steps {
+            script {
+                def envChoice = params.DEPLOY_ENV ?: 'staging'
+                def EB_ENV_NAME = "baseapi-${envChoice}-env"
+                echo "Fazendo deploy no ambiente: ${EB_ENV_NAME}"
+                sh "./deploy.sh ${EB_ENV_NAME}"
+            }
+        }
+    }
 }
 
 post {
     success {
-        echo 'Deploy deu bom.'
+        echo 'Deploy deu bom, meu bom.'
     }
     failure {
         echo 'Falha no deploy.'

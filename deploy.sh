@@ -17,7 +17,7 @@ rm -f $ZIP_FILE
 zip -j $ZIP_FILE $ARTIFACT
 
 if [ ! -d .elasticbeanstalk ]; then
-eb init "seu-nome-da-aplicacao-eb" --platform java --region $AWS_DEFAULT_REGION
+eb init "$EB_APP_NAME" --platform java --region $AWS_DEFAULT_REGION
 fi
 
 eb deploy $EB_ENV_NAME --staged
