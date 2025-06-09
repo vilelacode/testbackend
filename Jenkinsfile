@@ -13,7 +13,7 @@ stages {
     stage('Checkout') {
         steps {
             checkout scm
-            sh 'apt-get update && apt-get install -y zip'
+            //sh 'apt-get update && apt-get install -y zip'
             sh 'chmod +x ./mvnw'
             sh 'chmod +x ./deploy.sh'
         }
