@@ -3,7 +3,7 @@
 set -e
 
 EB_APP_NAME="baseapi"
-EB_ENV_NAME="Baseapi-env"
+EB_ENV_NAME="$1"
 
 ARTIFACT="target/*.jar"
 
@@ -12,8 +12,12 @@ echo "Erro: artefato não encontrado em $ARTIFACT"
 exit 1
 fi
 
+ZIP_FILE="deploy.zip"
+rm -f $ZIP_FILE
+zip -j $ZIP_FILE $ARTIFACT
+
 if [ ! -d .elasticbeanstalk ]; then
-eb init $EB_APP_NAME --platform java --region $AWS_DEFAULT_REGION
+eb init "seu-nome-da-aplicacao-eb" --platform java --region $AWS_DEFAULT_REGION
 fi
 
 eb deploy $EB_ENV_NAME --staged
