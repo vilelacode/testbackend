@@ -1,3 +1,6 @@
+pipeline {
+  agent any
+
 environment {
     AWS_DEFAULT_REGION = 'us-east-1'
 }
@@ -35,5 +38,6 @@ post {
     }
     failure {
         echo 'Falha no deploy.'
+        }
     }
 }
