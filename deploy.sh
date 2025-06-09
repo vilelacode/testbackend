@@ -2,6 +2,8 @@
 #!/bin/bash
 set -e
 
+chmod +x "$0"
+
 EB_APP_NAME="baseapi"
 EB_ENV_NAME="$1"
 
